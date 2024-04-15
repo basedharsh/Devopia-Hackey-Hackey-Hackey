@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "871382777570",
+    "project_id": "devopia-hackey-hackey",
+    "storage_bucket": "devopia-hackey-hackey.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871382777570:android:bcd472c6bf2c342592a8bb",
+        "android_client_info": {
+          "package_name": "com.codeforany.trackizer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCalIlxmvgKTUCCKAlk6uQcZ3ECjFwFkyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
