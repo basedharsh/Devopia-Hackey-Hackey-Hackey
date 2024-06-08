@@ -1,37 +1,16 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:http/http.dart' as http;
 
-class PDFuploadPage extends StatefulWidget {
-  const PDFuploadPage({Key? key}) : super(key: key);
+class ChatPage extends StatefulWidget {
+  const ChatPage({Key? key}) : super(key: key);
 
   @override
-  State<PDFuploadPage> createState() => _PDFuploadPageState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _PDFuploadPageState extends State<PDFuploadPage> {
-  String geminiData = '';
+class _ChatPageState extends State<ChatPage> {
   final TextEditingController _questionController = TextEditingController();
   List<Map<String, String>> messages = [];
-
-  Future<void> fetchData() async {
-    var url = Uri.parse('http://10.0.2.2:5000/pdfToText');
-    try {
-      var response = await http.get(url);
-      if (response.statusCode == 200) {
-        var jsonResponse = json.decode(response.body);
-        setState(() {
-          geminiData =
-              jsonResponse['pdfText'] as String; // Store the full PDF text
-        });
-      } else {
-        print('Failed to load data: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
 
   void handleQuestion() async {
     String question = _questionController.text;
@@ -41,9 +20,7 @@ class _PDFuploadPageState extends State<PDFuploadPage> {
       });
       _questionController.clear();
 
-      // Use the first 1000 characters of the PDF content or less for context
-      String prompt =
-          "Conduct a thorough analysis of the provided PDF data. Extract key insights and use these insights to formulate a detailed response. Based on your comprehensive analysis, answer the following question: '$question'.\n\nPDF Data Snippet: '${geminiData.substring(0, 4000)}. Just make sure you dont say i cant provide or i cant provide that use your thinking and give data.'";
+      String prompt = "Answer the following question: '$question'.";
 
       try {
         final model = GenerativeModel(
@@ -51,6 +28,7 @@ class _PDFuploadPageState extends State<PDFuploadPage> {
             apiKey: "AIzaSyCYMHQs8ZPkDC6vSAGqHor17luXQ6ZSXrA");
         final content = [Content.text(prompt)];
         final response = await model.generateContent(content);
+
         setState(() {
           messages.add({
             "type": "answer",
@@ -67,17 +45,11 @@ class _PDFuploadPageState extends State<PDFuploadPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    fetchData(); // Fetch PDF data on init
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Investment Details'),
+        title: Text('Chat with AI'),
         backgroundColor: Colors.black,
         elevation: 0,
       ),
@@ -145,4 +117,10 @@ class _PDFuploadPageState extends State<PDFuploadPage> {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: ChatPage(),
+  ));
 }

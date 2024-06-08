@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:trackizer/test/displaytest.dart';
-import 'package:trackizer/view/add_subscription/add_subscription_view.dart';
+
 import 'package:trackizer/view/group/groups_display.dart';
 import 'package:trackizer/view/home/main_home.dart';
-import 'package:trackizer/view/login/user_info.dart';
+
+import 'package:trackizer/view/pdfupload/chatti.dart';
 import 'package:trackizer/view/pdfupload/pdf2.dart';
-import 'package:trackizer/view/pdfupload/pdfupload.dart';
 
 import '../../common/color_extension.dart';
-import '../calender/calender_view.dart';
-import '../card/cards_view.dart';
-import '../home/home_view.dart';
+
 import '../spending_budgets/spending_budgets_view.dart';
 
 class MainTabView extends StatefulWidget {
@@ -61,7 +58,7 @@ class _MainTabViewState extends State<MainTabView> {
                                 setState(() {
                                   selectTab = 0;
                                   // currentTabView = const HomeView();
-                                  currentTabView = HomeView();
+                                  currentTabView = MainHome();
                                 });
                               },
                               icon: Image.asset(
@@ -97,7 +94,7 @@ class _MainTabViewState extends State<MainTabView> {
                               onPressed: () {
                                 setState(() {
                                   selectTab = 2;
-                                  currentTabView = PDFuploadPage();
+                                  currentTabView = ChatPage();
                                 });
                               },
                               icon: Image.asset(
