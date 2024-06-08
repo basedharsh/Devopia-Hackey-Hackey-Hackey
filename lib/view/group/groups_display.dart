@@ -68,7 +68,7 @@ class _GroupsDisplayPageState extends State<GroupsDisplayPage> {
                 "My Savings",
                 style: Theme.of(context)
                     .textTheme
-                    .headline5
+                    .bodyLarge
                     ?.copyWith(color: Colors.white),
               ),
               SizedBox(height: 20),
@@ -105,7 +105,7 @@ class _GroupsDisplayPageState extends State<GroupsDisplayPage> {
                 "Group Savings",
                 style: Theme.of(context)
                     .textTheme
-                    .headline5
+                    .bodyLarge
                     ?.copyWith(color: Colors.white),
               ),
               ListView.builder(
